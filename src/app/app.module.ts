@@ -3,11 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FilmViewComponent } from './film-view/film-view.component';
 //module : qui va charger l app 
 @NgModule({
   // Les components sont ici , il sont ajoute par cli ici , mais si on a fait du copy/past , on doit les ajouter manuelllement import export
   declarations: [
-    AppComponent
+    AppComponent,
+    FilmViewComponent
   ],
   // Les modules 
   imports: [
