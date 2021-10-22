@@ -1,16 +1,8 @@
 <table>
     <tr>
-    <td *ngFor="let film of films" style="border: 1px solid;">
-        <img src="{{film.img}}" />
-        <h1>{{film.title }} - {{film.year}} - {{film.score}}mdb </h1>
-        <p>{{film.description}} </p>
-        <button type="button" class="btn btn-primary" (click)="showCurrentFilm(film)">
-            show details</button>
-    </td>
-
-   
+        <app-film-component style="display: inline-block;" *ngFor="let film of films" [film]="film"  >
+            
+        </app-film-component>
+     
 </tr>
-        
-
-   
 </table>

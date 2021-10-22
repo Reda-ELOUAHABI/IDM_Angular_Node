@@ -18,7 +18,5 @@ export class film{
             this.score = 0;
           }
         this.year=year;
-
     }
-    
 }

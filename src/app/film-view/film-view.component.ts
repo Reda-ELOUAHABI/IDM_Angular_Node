@@ -9,7 +9,6 @@ import { film } from '../Modules/Films';
 })
 export class FilmViewComponent implements OnInit {
 
-
   // array of films
   films = [
     new film(1,"Film 1", 
@@ -26,10 +25,6 @@ export class FilmViewComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  showCurrentFilm(film:film){
-    alert("title :"+ film.title + " description : " + film.description);
   }
 
   makeid(length: Number) {
