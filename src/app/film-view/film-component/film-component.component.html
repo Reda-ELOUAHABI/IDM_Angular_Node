@@ -1,8 +1,10 @@
 
-<td  style="border: 1px solid;">
-    <img src="{{film.img}}" width="60px" />
-    <h1>{{film.title }} - {{film.year}} - {{film.score}}mdb </h1>
-    <p>{{film.description}} </p>
-    <button type="button" class="btn btn-primary" (click)="showCurrentFilm(film)">
+<div class="card" style="border: 1px solid; height: 350px; ">
+    <img  alt="I will fix the image path :" [src]="getImageFromServer(film.backdrop_path)" />
+    <!-- <h3>{{film.title }} - {{film.vote_averrage}}mdb </h3> -->
+    <h3>{{film.title }}</h3>
+    <!-- <p>{{film.overview}} </p> -->
+    <button type="button" class="btn btn-primary shwoDetailsBtn" (click)="showCurrentFilm(film)" >
         show details</button>
-</td>
+</div> 
+

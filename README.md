@@ -40,4 +40,9 @@ ng serve --port 5000
 ng serve -o
 */
 //Manip
-//  ng g c film view [ng generate component]
+//  ng g c film view [ng generate component] --spec false [to not generate test files]
+//ng generate service nameService || ng g s  nameService == une classe typescript avec inhectable decorator
+
+
+<!-- Generale Tuto  -->
+5- 13. Getting Access to the Template & DOM with @ViewChild

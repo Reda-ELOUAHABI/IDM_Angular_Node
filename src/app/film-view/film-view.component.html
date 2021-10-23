@@ -1,8 +1,22 @@
-<table>
-    <tr>
-        <app-film-component style="display: inline-block;" *ngFor="let film of films" [film]="film"  >
-            
-        </app-film-component>
-     
-</tr>
-</table>
+<div>
+       
+                <div style="text-align: center;" >
+                        <input type="text" placeholder="Search" #query  />
+                        <button (click)="ShowFilms(query.value)" class="btn btn-info">Search</button>
+                <br><br><br>
+                </div>
+        
+
+
+        <div style="display: flex;
+        justify-content: space-around;
+        align-content: space-between;
+         flex-wrap: wrap;">
+                <app-film-component style="width: 30%;" *ngFor="let film of films" [film]="film">
+
+                </app-film-component>
+        </div>
+
+
+
+</div>

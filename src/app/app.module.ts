@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { FilmViewComponent } from './film-view/film-view.component';
 import { FilmComponentComponent } from './film-view/film-component/film-component.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 //module : qui va charger l app 
 @NgModule({
   // Les components sont ici , il sont ajoute par cli ici , mais si on a fait du copy/past , on doit les ajouter manuelllement import export
@@ -17,7 +19,8 @@ import { FilmComponentComponent } from './film-view/film-component/film-componen
   // Les modules 
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   // Les services pour le concept d'injection de dependance , c'est angulat qui va faire les instanciation au lieu de nous
   providers: [],
