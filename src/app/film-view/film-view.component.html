@@ -17,6 +17,14 @@
                 </app-film-component>
         </div>
 
+<div style="margin-left: 43%;">
 
-
+          <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item" [ngClass]="currentPage===1 ? 'disabled' : ''"  ><a class="page-link"  (click)="onPrevious()"   >Previous</a></li>
+                  <li class="page-item"><a class="page-link" (click)="onNext()" >Next</a></li>
+                </ul>
+              </nav>
+</div>
+      
 </div>

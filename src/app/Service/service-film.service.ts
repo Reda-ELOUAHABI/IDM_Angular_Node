@@ -11,14 +11,15 @@ export class ServiceFilmService {
 // Url="https://api.themoviedb.org/3/movie/550?api_key=653c2ee8cd95fbd2626732aa98a8333e" ;
   constructor(private http: HttpClient) { }
   
-  getAllFilms(){
+  getAllFilms(page: number){
     // alert("aaHello form Service");
-    const AllFilms =  "https://api.themoviedb.org/3/movie/popular?api_key=653c2ee8cd95fbd2626732aa98a8333e";
+    const AllFilms =  "https://api.themoviedb.org/3/movie/popular?api_key=653c2ee8cd95fbd2626732aa98a8333e&page="+page;
     return this.http.get(AllFilms).
     toPromise().then((Response: any)=>{
+
       // jsonResult = response.json();
     //  this.films=Response["result"]
-    console.log(Response.results);
+    console.log("\n\n"+Response.results);
     
 return Response.results;
     },

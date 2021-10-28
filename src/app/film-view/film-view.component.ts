@@ -28,14 +28,14 @@ export class FilmViewComponent implements OnInit {
 
 
   films = [];
-  query= ' aa';
+  query = ' aa';
   constructor(private serviceFilmService: ServiceFilmService) { }
 
   ngOnInit(): void {
     // this.films = this.serviceFilmService.films;
-    //  I need to fill films here 
-    this.serviceFilmService.getAllFilms().then(res =>{
-      this.films=res;
+    //  I need to fill films here
+    this.serviceFilmService.getAllFilms(1).then(res => {
+      this.films = res;
     });
 
   }
@@ -52,12 +52,34 @@ export class FilmViewComponent implements OnInit {
   }
 
   ShowFilms(query: string) {
-    this.serviceFilmService.getSpecificFilm(query,0).then(res =>{
-      this.films=res;
+    this.serviceFilmService.getSpecificFilm(query, 0).then(res => {
+      this.films = res;
     });
-    
+
     // this.serviceFilmService.getFilmsFromServer("aa",10);
   }
+
+
+
+  currentPage = 1;
+  onNext() {
+      this.currentPage++;
+      this.serviceFilmService.getAllFilms(this.currentPage).then(res => {
+        this.films = res;
+      });
+  }
+
+
+  onPrevious() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.serviceFilmService.getAllFilms(this.currentPage).then(res => {
+        this.films = res;
+      });
+    }
+  }
+
+
 
   // todo: read down : 
   // To implemetn : binding a custom event  at
