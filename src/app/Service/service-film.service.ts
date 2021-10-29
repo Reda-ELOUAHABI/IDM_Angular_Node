@@ -30,25 +30,27 @@ export class ServiceFilmService {
   // }
 
   // Using Observer/Observable from rxjs
+  // getAllFilms(page: number) {
+  //   const AllFilms = "https://api.themoviedb.org/3/movie/popular?api_key=653c2ee8cd95fbd2626732aa98a8333e&page=" + page;
+  //   return this.http.get(AllFilms);
+  // }
+
+// Using les Subjects [Programmation Reactive avec RxJS]= Notification Imediat des changement
+films: Array<any> = [];
+flimsSubject = new Subject<any>();
   getAllFilms(page: number) {
     const AllFilms = "https://api.themoviedb.org/3/movie/popular?api_key=653c2ee8cd95fbd2626732aa98a8333e&page=" + page;
-    return this.http.get(AllFilms);
+    return this.http.get(AllFilms).subscribe((films:any)=>{
+      this.films=films;
+      // it fills su=ubject
+      this.emitFilmsSubject();
+    });
   }
-
-// // Using les Subjects [Programmation Reactive avec RxJS]= Notification Imediat des changement
-// films: Array<any> = [];
-// flimsSubject = new Subject<any>();
-//   getAllFilms(page: number) {
-//     const AllFilms = "https://api.themoviedb.org/3/movie/popular?api_key=653c2ee8cd95fbd2626732aa98a8333e&page=" + page;
-//     return this.http.get(AllFilms).subscribe((films:any)=>{
-//       this.films=films;
-//       // it fills su=ubject
-//       this.emitFilmsSubject();
-//     });
-//   }
-//   emitFilmsSubject() {
-//     this.flimsSubject.next(this.films.slice());
-//   }
+  emitFilmsSubject() {
+    this.flimsSubject.next(this.films
+      // this.films.slice()
+      );
+  }
 
   getSpecificFilm(query: string, page: number) {
     // 

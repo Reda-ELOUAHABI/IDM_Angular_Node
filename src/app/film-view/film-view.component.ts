@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import "../Modules/Films"
 import { film } from '../Modules/Films';
 import { ServiceFilmService } from '../Service/service-film.service';
@@ -10,7 +11,7 @@ import { ServiceFilmService } from '../Service/service-film.service';
   templateUrl: './film-view.component.html',
   styleUrls: ['./film-view.component.css']
 })
-export class FilmViewComponent implements OnInit {
+export class FilmViewComponent implements OnInit,OnDestroy {
 
   // array of films
   //   films = [
@@ -28,15 +29,25 @@ export class FilmViewComponent implements OnInit {
 
 
   films = [];
-  query = ' aa';
+  query = '';
+  filmsSubscription: Subscription = new Subscription;
+
   constructor(private serviceFilmService: ServiceFilmService) { }
 
   ngOnInit(): void {
     // this.films = this.serviceFilmService.films;
     //  I need to fill films here
-    this.serviceFilmService.getAllFilms(1).subscribe((res:any) => {
-      this.films = res.results;
-    });
+    this.serviceFilmService.getAllFilms(1);
+    this.filmsSubscription = this.serviceFilmService.flimsSubject.subscribe((result:any)=>{
+      this.films=result.results;
+    })
+this.serviceFilmService.emitFilmsSubject();
+    // this.serviceFilmService.getAllFilms(1).subscribe((res:any) => {
+    //   this.films = res.results;
+    // });
+  }
+  ngOnDestroy(){
+  this.filmsSubscription.unsubscribe();
   }
 
   makeid(length: Number) {
@@ -62,21 +73,21 @@ export class FilmViewComponent implements OnInit {
 
   currentPage = 1;
   onNext() {
-    
-      this.currentPage++;
-      this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
-        this.films = res.results;
-      });
+
+      // this.currentPage++;
+      // this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
+      //   this.films = res.results;
+      // });
   }
 
 
   onPrevious() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
-        this.films = res.results;
-      });
-    }
+    // if (this.currentPage > 1) {
+    //   this.currentPage--;
+    //   this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
+    //     this.films = res.results;
+    //   });
+    // }
   }
 
 
