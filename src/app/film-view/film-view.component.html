@@ -1,30 +1,25 @@
 <div>
-       
-                <div style="text-align: center;" >
-                        <input type="text" placeholder="Search" #query  />
-                        <button (click)="ShowFilms(query.value)" class="btn btn-info">Search</button>
+        <!-- Inside Of Input (ngModelChange)="ShowFilms2()" -->
+        <div style="text-align: center;">
+                <input type="text" placeholder="Search" #query />
+                <button (click)="ShowFilms(query.value)" class="btn btn-info">Search</button>
                 <br><br><br>
-                </div>
-        
-
-
+        </div>
         <div style="display: flex;
         justify-content: space-around;
         align-content: space-between;
          flex-wrap: wrap;">
-                <app-film-component style="width: 30%;" *ngFor="let film of films" [film]="film">
-
+                <app-film-component style="width: 30%; margin: 10px;" *ngFor="let film of films" [film]="film">
                 </app-film-component>
         </div>
+        <div style="margin-left: 43%;">
+                <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                                <li class="page-item" [ngClass]="currentPage===1 ? 'disabled' : ''"><a class="page-link"
+                                                (click)="onPrevious()">Previous</a></li>
+                                <li class="page-item"><a class="page-link" (click)="onNext()">Next</a></li>
+                        </ul>
+                </nav>
+        </div>
 
-<div style="margin-left: 43%;">
-
-          <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item" [ngClass]="currentPage===1 ? 'disabled' : ''"  ><a class="page-link"  (click)="onPrevious()"   >Previous</a></li>
-                  <li class="page-item"><a class="page-link" (click)="onNext()" >Next</a></li>
-                </ul>
-              </nav>
-</div>
-      
 </div>

@@ -34,10 +34,9 @@ export class FilmViewComponent implements OnInit {
   ngOnInit(): void {
     // this.films = this.serviceFilmService.films;
     //  I need to fill films here
-    this.serviceFilmService.getAllFilms(1).then(res => {
-      this.films = res;
+    this.serviceFilmService.getAllFilms(1).subscribe((res:any) => {
+      this.films = res.results;
     });
-
   }
 
   makeid(length: Number) {
@@ -52,10 +51,10 @@ export class FilmViewComponent implements OnInit {
   }
 
   ShowFilms(query: string) {
+    console.log(query);
     this.serviceFilmService.getSpecificFilm(query, 0).then(res => {
       this.films = res;
     });
-
     // this.serviceFilmService.getFilmsFromServer("aa",10);
   }
 
@@ -63,9 +62,10 @@ export class FilmViewComponent implements OnInit {
 
   currentPage = 1;
   onNext() {
+    
       this.currentPage++;
-      this.serviceFilmService.getAllFilms(this.currentPage).then(res => {
-        this.films = res;
+      this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
+        this.films = res.results;
       });
   }
 
@@ -73,8 +73,8 @@ export class FilmViewComponent implements OnInit {
   onPrevious() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.serviceFilmService.getAllFilms(this.currentPage).then(res => {
-        this.films = res;
+      this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
+        this.films = res.results;
       });
     }
   }

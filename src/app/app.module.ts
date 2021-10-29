@@ -7,6 +7,7 @@ import { FilmViewComponent } from './film-view/film-view.component';
 import { FilmComponentComponent } from './film-view/film-component/film-component.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 //module : qui va charger l app 
 @NgModule({
@@ -20,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    // For NgModle /CHange
+    FormsModule
   ],
   // Les services pour le concept d'injection de dependance , c'est angulat qui va faire les instanciation au lieu de nous
   providers: [],
