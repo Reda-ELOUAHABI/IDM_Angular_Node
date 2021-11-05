@@ -19,16 +19,17 @@ export class FilmViewComponent implements OnInit,OnDestroy {
   //     "https://m.media-amazon.com/images/I/519NBNHX5BL._AC_SY445_.jpg"
   //     ,this.makeid(20),this.makeid(20), "Poster Path"),
   //     new film(2,2,
-  //     "Film 2", 
+  //     "Film 2",
   //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5kM38v0N_NVi96FOrQqiOWX16jl2KlQvMREa1ZcD6GhWa_gU2Y-XjAkTJ8q-RehLuLgw&usqp=CAU"
   //     , this.makeid(20),this.makeid(20),this.makeid(20)),
-  //     new film(3,1,"Film 3", 
+  //     new film(3,1,"Film 3",
   // "https://media.senscritique.com/media/000008892591/source_big/Abdou_chez_les_Almohades.jpg"
   //      , this.makeid(20),this.makeid(20),this.makeid(20)),
   //    ]
 
 
   films = [];
+  input="";
   query = '';
   filmsSubscription: Subscription = new Subscription;
 
@@ -68,6 +69,13 @@ this.serviceFilmService.emitFilmsSubject();
     });
     // this.serviceFilmService.getFilmsFromServer("aa",10);
   }
+  ShowFilms1() {
+    this.serviceFilmService.getSpecificFilmOnChange(this.input).subscribe((result:any)=>{
+      this.films=result;
+    })
+
+    // this.serviceFilmService.getFilmsFromServer("aa",10);
+  }
 
 
 
@@ -92,13 +100,14 @@ this.serviceFilmService.emitFilmsSubject();
 
 
 
-  // todo: read down : 
+  // todo: read down :
   // To implemetn : binding a custom event  at
-  // https://hidevs.net/course/angular-the-complete-guide 
+  // https://hidevs.net/course/angular-the-complete-guide
   //  5. Components & Databinding Deep Dive 6. Binding to Custom Events
   // ShowCurrentFilmFromTheParent($event){
 
   // }
+
 
 
 }

@@ -8,6 +8,8 @@ import { FilmComponentComponent } from './film-view/film-component/film-componen
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { DetailsFilmComponent } from './details-film/details-film.component';
+import { RouterModule } from '@angular/router';
 
 //module : qui va charger l app 
 @NgModule({
@@ -16,14 +18,16 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     FilmViewComponent,
     FilmComponentComponent,
+    DetailsFilmComponent,
   ],
-  // Les modules 
+  // Les modules
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     // For NgModle /CHange
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   // Les services pour le concept d'injection de dependance , c'est angulat qui va faire les instanciation au lieu de nous
   providers: [],
@@ -31,3 +35,9 @@ import { FormsModule } from '@angular/forms';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+// Route :
+// 1-import Router Module ,declare appRoute
+// 2-declarer les routes
+// 3-imports[RutrerMoudule<appRoute>
+// 4-declarer les <router-outlet>
+

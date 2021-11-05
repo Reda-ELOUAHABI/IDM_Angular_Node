@@ -46,6 +46,7 @@ flimsSubject = new Subject<any>();
       this.emitFilmsSubject();
     });
   }
+
   emitFilmsSubject() {
     this.flimsSubject.next(this.films
       // this.films.slice()
@@ -53,7 +54,7 @@ flimsSubject = new Subject<any>();
   }
 
   getSpecificFilm(query: string, page: number) {
-    // 
+    //
     const FilmURL = "https://api.themoviedb.org/3/search/movie?api_key=653c2ee8cd95fbd2626732aa98a8333e&query=" + query;
     return this.http.get(FilmURL).
       toPromise().then((Response: any) => {
@@ -66,22 +67,29 @@ flimsSubject = new Subject<any>();
         (error) => {
           console.log("Error ", error);
         }
-      )
+      )}
 
-  }
+  getSpecificFilmOnChange(query: string) {
+    //
+    const FilmURL = "https://api.themoviedb.org/3/search/movie?api_key=653c2ee8cd95fbd2626732aa98a8333e&query=" + query;
+    return this.http.get(FilmURL);
+    }
 
   getFilmDetail(id: any) {
     const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=53cd43478eccb1239bfa57194c3cfe90&language=en-US';
-
-    return this.http.get(url).toPromise().then((res: any) => { return res; }, (error) => { console.log("Error Occcured : " + error) });
-
+    return this.http.get(url);
   }
 
   // getFilmDetail(id: any) {
   //   const url = 'https://api.themoviedb.org/3/movie/' + id + '?api_key=53cd43478eccb1239bfa57194c3cfe90&language=en-US';
-
   //   return this.http.get(url).toPromise().then((res: any) => { return res; }, (error) => { console.log("Error Occcured : " + error) });
-
   // }
 
+
+  PostFilmToFavorie(id: any){
+    /*curl -X PUT -d '{ "moviesFavories": { "id": "21"}}' 'https://movies-app-33617-de
+fault-rtdb.firebaseio.com/movies.json'*/
+    const url = "https://movies-app-33617-default-rtdb.firebaseio.com/movies.json";
+    return this.http.post(url,id);
+  }
 }

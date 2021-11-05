@@ -3,8 +3,19 @@
     <img  alt="I will fix the image path :" [src]="getImageFromServer(film.backdrop_path)" />
     <!-- <h3>{{film.title }} - {{film.vote_averrage}}mdb </h3> -->
     <h3>{{film.title }}</h3>
+  <button style="
+  border: none;
+  background-color: transparent;
+  position: relative;
+  left: 10px;
+
+">❤</button>
     <!-- <p>{{film.overview}} </p> -->
-    <button type="button" class="btn btn-primary shwoDetailsBtn" (click)="showCurrentFilm(film)" >
-        show details</button>
-</div> 
+  <a [routerLink]="['/details',film.id]">  <button type="button" class="btn btn-primary shwoDetailsBtn" (click)="showCurrentFilm(film)" >
+
+        show details
+
+        </button></a>
+
+</div>
 
