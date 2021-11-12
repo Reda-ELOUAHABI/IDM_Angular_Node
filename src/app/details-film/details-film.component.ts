@@ -27,9 +27,7 @@ export class DetailsFilmComponent implements OnInit {
     this.serviceFilmService.getFilmDetail(id).subscribe((result:any)=>{
       this.film=result;
       console.log(film)
-    })
-
-  }
+    })}
   getImageFromServer(urlImg: string){
     if(urlImg!=null){
       const ImgFIlm = "https://image.tmdb.org/t/p/w500/"+ urlImg;
@@ -41,7 +39,8 @@ export class DetailsFilmComponent implements OnInit {
   }
 
   AddToFavrite(id: any) {
-    alert(id);
+
+    this.serviceFilmService.PostFilmToFavorie(id).subscribe(res => console.log(res))
 
 
   }

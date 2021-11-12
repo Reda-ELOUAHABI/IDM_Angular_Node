@@ -1,5 +1,6 @@
-
-<div class="card" style="border: 1px solid; height: 350px; ">
+<!-- [ngClass]="{'IdExist' : filmsIds.indexOf('film.id')  }  -->
+<div class="card"
+    style="border: 1px solid; height: 350px; ">
     <img  alt="I will fix the image path :" [src]="getImageFromServer(film.backdrop_path)" />
     <!-- <h3>{{film.title }} - {{film.vote_averrage}}mdb </h3> -->
     <h3>{{film.title }}</h3>

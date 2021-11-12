@@ -10,8 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { DetailsFilmComponent } from './details-film/details-film.component';
 import { RouterModule } from '@angular/router';
+import { SignupComponent } from './signup/signup.component';
+import { SigninComponent } from './signin/signin.component';
+import { FavorisComponent } from './favoris/favoris.component';
+import { NavbarNotConnComponent } from './navbar-not-conn/navbar-not-conn.component';
+import { NavbarConnectedComponent } from './navbar-connected/navbar-connected.component';
 
-//module : qui va charger l app 
+//module : qui va charger l app
 @NgModule({
   // Les components sont ici , il sont ajoute par cli ici , mais si on a fait du copy/past , on doit les ajouter manuelllement import export
   declarations: [
@@ -19,6 +24,11 @@ import { RouterModule } from '@angular/router';
     FilmViewComponent,
     FilmComponentComponent,
     DetailsFilmComponent,
+    SignupComponent,
+    SigninComponent,
+    FavorisComponent,
+    NavbarNotConnComponent,
+    NavbarConnectedComponent,
   ],
   // Les modules
   imports: [

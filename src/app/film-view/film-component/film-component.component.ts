@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { film } from 'src/app/Modules/Films';
+import {Subscription} from "rxjs";
+import {ServiceFilmService} from "../../Service/service-film.service";
 
 @Component({
   selector: 'app-film-component',
@@ -10,16 +12,24 @@ import { film } from 'src/app/Modules/Films';
 })
 export class FilmComponentComponent implements OnInit {
   @Input() film: any;
-
+  // @Input() favoris: boolean;
+  //courantid = film.id;
   // Assigning an Alias to Custom Properties
-  // if we want to use a differenbnt name on the child componenet , we can use 
+  // if we want to use a differenbnt name on the child componenet , we can use
   // @Input('thedifferentName') film: any;  and at the chiold [thedifferentName]="XX"
 
-  constructor() { }
+  filmsIds =[];
+  constructor(private serviceFilmService: ServiceFilmService) { }
   ngOnInit(): void {
+    this.serviceFilmService.GetFilmsOnFavories().subscribe((Response: any) => {
+      this.filmsIds = Object.values(Response);
+
+    });
+    // if (this.favoris == true)
+    // alert(this.favoris);
   }
   showCurrentFilm(film: film) {
-    alert("title :" + film.title + " description : " + film.overview);
+    // alert("title :" + film.title + " description : " + film.overview);
   }
   getImageFromServer(urlImg: string){
     if(urlImg!=null){

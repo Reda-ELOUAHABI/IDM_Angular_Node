@@ -1,9 +1,9 @@
 <div>
-  <div class="card" style="border: 1px solid; height: 350px; ">
+  <div class="card" style="border: 1px solid; height: 550px;  ">
     <button style="height: 60px; width: 100px;" (click)="AddToFavrite(film.id)">
       ❤
     </button>
-    <img  alt="I will fix the image path :" [src]="getImageFromServer(film.backdrop_path)" />
+    <img  alt="I will fix the image path :" [src]="getImageFromServer(film.backdrop_path)"  />
     <!-- <h3>{{film.title }} - {{film.vote_averrage}}mdb </h3> -->
     <h3>{{film.title }}</h3>
     <p>{{film.overview }}</p>

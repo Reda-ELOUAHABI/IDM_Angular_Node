@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NullTemplateVisitor } from '@angular/compiler';
 import { Subject } from 'rxjs';
 
+//todo: On Change Model
 
 @Injectable({
   providedIn: 'root'
@@ -91,5 +92,20 @@ flimsSubject = new Subject<any>();
 fault-rtdb.firebaseio.com/movies.json'*/
     const url = "https://movies-app-33617-default-rtdb.firebaseio.com/movies.json";
     return this.http.post(url,id);
+  }
+  GetFilmsOnFavories(){
+    const url = "https://movies-app-33617-default-rtdb.firebaseio.com/movies.json";
+    return this.http.get(url);
+  }
+
+//  Auth
+  PostUser(username: any, password: any){
+    const url = "https://movies-app-33617-default-rtdb.firebaseio.com/Users.json";
+    const body = { username: username, password: password};
+    return this.http.post(url,body);
+  }
+  GetUsers(){
+    const url = "https://movies-app-33617-default-rtdb.firebaseio.com/Users.json";
+    return this.http.get(url);
   }
 }

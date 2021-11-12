@@ -31,8 +31,9 @@ export class FilmViewComponent implements OnInit,OnDestroy {
   films = [];
   input="";
   query = '';
-  filmsSubscription: Subscription = new Subscription;
+  filmsIds =[];
 
+  filmsSubscription: Subscription = new Subscription;
   constructor(private serviceFilmService: ServiceFilmService) { }
 
   ngOnInit(): void {
@@ -46,6 +47,11 @@ this.serviceFilmService.emitFilmsSubject();
     // this.serviceFilmService.getAllFilms(1).subscribe((res:any) => {
     //   this.films = res.results;
     // });
+
+    this.serviceFilmService.GetFilmsOnFavories().subscribe((Response: any) => {
+      this.filmsIds = Object.values(Response);
+    });
+
   }
   ngOnDestroy(){
   this.filmsSubscription.unsubscribe();
@@ -63,7 +69,7 @@ this.serviceFilmService.emitFilmsSubject();
   }
 
   ShowFilms(query: string) {
-    console.log(query);
+    // console.log(query);
     this.serviceFilmService.getSpecificFilm(query, 0).then(res => {
       this.films = res;
     });
@@ -81,8 +87,8 @@ this.serviceFilmService.emitFilmsSubject();
 
   currentPage = 1;
   onNext() {
-
-      // this.currentPage++;
+      this.currentPage++;
+      this.serviceFilmService.getAllFilms(this.currentPage)
       // this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
       //   this.films = res.results;
       // });
@@ -90,12 +96,13 @@ this.serviceFilmService.emitFilmsSubject();
 
 
   onPrevious() {
-    // if (this.currentPage > 1) {
-    //   this.currentPage--;
-    //   this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
-    //     this.films = res.results;
-    //   });
-    // }
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.serviceFilmService.getAllFilms(this.currentPage);
+      // this.serviceFilmService.getAllFilms(this.currentPage).subscribe((res:any) => {
+      //   this.films = res.results;
+      // });
+    }
   }
 
 
@@ -107,6 +114,9 @@ this.serviceFilmService.emitFilmsSubject();
   // ShowCurrentFilmFromTheParent($event){
 
   // }
+
+
+
 
 
 
