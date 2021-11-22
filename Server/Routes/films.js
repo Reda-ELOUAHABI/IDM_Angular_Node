@@ -1,36 +1,31 @@
-const  express = require("express")
-const  Router = express.Router();
+const express = require("express")
+const Router = express.Router();
+const MoviesController = require("../Controller/movieController")
 
 films = [
-  {id: "10",
-    name: "call me something"},
-  {id: "11",
-    name: "call me sometshing"},
-  {id: "12",
-    name: "call me something"}
+  {
+    id: "10",
+    name: "call me something"
+  },
+  {
+    id: "11",
+    name: "call me sometshing"
+  },
+  {
+    id: "12",
+    name: "call me something"
+  }
 ]
 Router
   .route('/')
-  .get((req,res)=>{
-  res.send("Hello World")
-})
+  .get(MoviesController.helloWorld)
 
 Router.route('/films')
-  .get((req,res)=>{
-    res.send(films)
-  });
+  .get(MoviesController.getAllMovies);
 
-Router.route('/films/:id').get((req,res) => {
-  let id = req.params.id
-  console.log(films.indexOf(id));
-  res.send("films.indexOf(id)")
-});
+Router.route('/films/:id').get(MoviesController.getMovieById);
 
-Router.route('/films').post((req,res)=>{
-  console.log(req);
-  res.send("OK")
-
-});
+Router.route('/films').post(MoviesController.CreateMovie);
 
 module.exports = Router;
 

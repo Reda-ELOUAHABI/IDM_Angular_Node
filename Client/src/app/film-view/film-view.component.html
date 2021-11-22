@@ -1,23 +1,23 @@
 <div>
         <!-- Inside Of Input (ngModelChange)="ShowFilms2()" -->
-        <div style="text-align: center;">
+        <div style="text-align: center; width: 700px !important;">
                 <input type="text" placeholder="Search" #query />
                 <button (click)="ShowFilms(query.value)" class="btn btn-info">Search</button>
                 <br><br><br>
         </div>
 
-<!--       <div style="text-align: center;">-->
-<!--                <input type="text" placeholder="Search" [(ngModel)]="input" (ngModelChange)="ShowFilms1()" )]/>-->
-<!--                <button (click)="ShowFilms(input)"   class="btn btn-info">Search</button>-->
-<!--                <br><br><br>-->
-<!--        </div>-->
+        <!--       <div style="text-align: center;">-->
+        <!--                <input type="text" placeholder="Search" [(ngModel)]="input" (ngModelChange)="ShowFilms1()" )]/>-->
+        <!--                <button (click)="ShowFilms(input)"   class="btn btn-info">Search</button>-->
+        <!--                <br><br><br>-->
+        <!--        </div>-->
 
         <div style="display: flex;
         justify-content: space-around;
         align-content: space-between;
          flex-wrap: wrap;">
-<!--          [favoris]="filmsIds.includes(film['id'])"-->
-                <app-film-component style="width: 30%; margin: 10px;" *ngFor="let film of films"  [film]="film">
+                <!--          [favoris]="filmsIds.includes(film['id'])"-->
+                <app-film-component style="width: 30%; margin: 10px;" *ngFor="let film of films" [film]="film">
                 </app-film-component>
         </div>
         <div style="margin-left: 43%;">
