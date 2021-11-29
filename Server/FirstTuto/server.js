@@ -93,6 +93,7 @@ server.get("/names/:idParams", (req, res) => {
     }
     return res.json(singleName)
 })
+
 //search by query
 server.get("/persons/query", (req, res) => {
     const  {search, limit} = req.query
