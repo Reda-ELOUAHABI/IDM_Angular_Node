@@ -108,11 +108,8 @@ if(sortedPersons.length<1){
     //we setup this return because server can return only one response ,
     // so we force it to break from function
     return res.status(200).json({success: true, data : []})
-
-
 }
    res.status(200).json(sortedPersons)
-
 })
 
 //handling bad requests
