@@ -1,5 +1,5 @@
 //First Server
-//TUTO
+//TUTO --  020 Query String
 // https://hidevs.net/course/nodejs-tutorial-and-projects-course
 //npm init -y
 const http = require('http')
@@ -52,43 +52,43 @@ server.get('/html',
 
 //res.json(body)
 //using another data.js
-const {persons} = require("./data")
-server.get("/", (req,res) => {
+const { persons } = require("./data")
+server.get("/", (req, res) => {
     res.status(200).send("<h1> See ALL Person </h1> " +
         "<a href='/persons'>Click Here</a>")
 })
 
-server.get('/persons',(req, res) => {
+server.get('/persons', (req, res) => {
     //Get Day Name JS
     let weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date().getDay()]
-    persons.push({id: 3, name: weekday , age: 550})
+    persons.push({ id: 3, name: weekday, age: 550 })
 
     res.json(
         // [{id: 0, name: "reda"}, {name: "ahmed"}]
-    persons
+        persons
     )
 })
 
 //get Only person's names
-server.get('/names', (req , res) => {
-const onlyNames = persons.map((person) => {
-    //to take only names and ids from person array without ages , and make sure that you select the right property !
-    const {id ,name} = person;
-    return {id ,name}
-})
+server.get('/names', (req, res) => {
+    const onlyNames = persons.map((person) => {
+        //to take only names and ids from person array without ages , and make sure that you select the right property !
+        const { id, name } = person;
+        return { id, name }
+    })
     res.json(onlyNames);
 })
 
 //get by ides
 server.get("/names/:idParams", (req, res) => {
     //the URL could be more complex eg: '/names/:idParams/something/:AnotherParams
-    const { idParams} = req.params
+    const { idParams } = req.params
     console.log(idParams)
     const singleName = persons.find((person) =>
         person.id === Number(idParams)
     )
     //handling person undefined case [does not exist in the array]
-    if(!singleName){
+    if (!singleName) {
         return res.status(404).send("person does not Exist");
     }
     return res.json(singleName)
@@ -96,35 +96,36 @@ server.get("/names/:idParams", (req, res) => {
 
 //search by query
 server.get("/persons/query", (req, res) => {
-    const  {search, limit} = req.query
-    let  sortedPersons = [...persons]
+    const { search, limit } = req.query
+    let sortedPersons = [...persons]
     //URL example : http://localhost:5001/persons/query?limit=1&search=ah
-    if(search){
-        sortedPersons = sortedPersons.filter((person)=>{
+    if (search) {
+        sortedPersons = sortedPersons.filter((person) => {
             return person.name.startsWith(search)
-        })}
-if(limit){
-        sortedPersons = sortedPersons.slice(0,Number(limit))
-}
-if(sortedPersons.length<1){
-    // res.status(200).send("No Person match your request")
-    //we setup this return because server can return only one response ,
-    // so we force it to break from function
-    return res.status(200).json({success: true, data : []})
-}
-   res.status(200).json(sortedPersons)
+        })
+    }
+    if (limit) {
+        sortedPersons = sortedPersons.slice(0, Number(limit))
+    }
+    if (sortedPersons.length < 1) {
+        // res.status(200).send("No Person match your request")
+        //we setup this return because server can return only one response ,
+        // so we force it to break from function
+        return res.status(200).json({ success: true, data: [] })
+    }
+    res.status(200).json(sortedPersons)
 })
 
 //handling bad requests
 server.all("*", (
-    (req, res) =>{
-      res.status(401).
-      send('<h1>resources not found bro</h1>')
+    (req, res) => {
+        res.status(401).
+            send('<h1>resources not found bro</h1>')
     }
 ))
 
 
-server.listen(5001,() =>{
+server.listen(5001, () => {
     console.log("server runing at http://localhost:5001\n")
 })
 

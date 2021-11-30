@@ -13,6 +13,9 @@ const filmsRoutes = require('./Routes/films-routes')
 const usersRoutes = require('./Routes/users-routes')
 const port = 3000
 const app = express();
+// Express has it build in  body parser , the separate one is deprecated now and cause problem !
+app.use(express.json())
+// why thos f*** create me problem ??
 // app.use(bodyParser.json())
 // app.use(cors)
 //Movies App

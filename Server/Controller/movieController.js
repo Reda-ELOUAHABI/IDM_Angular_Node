@@ -1,3 +1,5 @@
+/****
+
 // I wont use this concept of Controller ..
 
 
@@ -8,7 +10,7 @@
 module.exports = {
   CreateMovie(req, res) {
     /*
-let new film = req.body or 
+let new film = req.body or
 
 let new film = new Film{
 title: req.body.title,
@@ -28,7 +30,7 @@ res.status(400).send({
     err: error
 })
 })
-    */
+    /
     console.log(req);
     res.send("OK")
   },
@@ -38,7 +40,7 @@ res.status(400).send({
 film.find().then((result)=>{
   res.status(200).send
 })
-    */
+    /
 
     let id = req.params.id
     console.log(films.indexOf(id));
@@ -55,6 +57,8 @@ film.find().then((result)=>{
 
 }
 
+
+
 // module.exports = {
 //     getFilm: this.getAllMovies
 // }
@@ -63,4 +67,8 @@ film.find().then((result)=>{
 deletFIilm*res, res){
 
 }
-*/
+
+
+***/
+
+
