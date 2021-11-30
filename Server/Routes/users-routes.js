@@ -1,32 +1,23 @@
 const express = require("express")
 const router = express.Router();
+const { check } = require("express-validator");
 
-const users = [
-    { id: "1", username: "admin", password: "admin" },
-    { id: "2", username: "user1", password: "admin" },
-    { id: "2", username: "user1", password: "admin" }
+const userController = require("../Controller/user-controller")
 
-]
-router.get('/users', (req, res) => {
-    res.json({ users });
-})
-router.get("/users/:uid", (req, res) => {
-    const userId = req.params.uid;
-    console.log(userId);
-    const user = users.find((user => {
-        return user.id === userId;
-    }));
-    // HANDLING ERRORs
-    // handling user does not exist case
-    // [asyn/DB : next(error)]
-    // [synch] : throw error (current case)
-    if (!user) {
-        const error = new Error('bro , could not find this user');
-        error.code = 404;
-        throw error;
-    }
+// 
+router.get('/', userController.getAllUsers)
+router.get("/:uid", userController.getUserById)
 
-    res.json({ user });
-})
+// register
+router.post('/signup',
+    [
+        check('username').not().isEmpty(),
+        check('email').isEmail().normalizeEmail(),
+        check('password').isLength({ min: 6 })
+    ],
+    userController.signUp)
+// login Sign in
+router.post('/signin', userController.signIn)
+
 
 module.exports = router;

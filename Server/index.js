@@ -5,21 +5,26 @@
 //const url = require('url')
 
 const express = require('express')
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 // const morgan = require('morgan')
 const cors = require('cors')
 
 const filmsRoutes = require('./Routes/films-routes')
 const usersRoutes = require('./Routes/users-routes')
+const HttpError = require("./Models/http-error");
+
 const port = 3000
-const app = express();
+var app = express()
+
+app.use(cors())
+// const app = express();
 // Express has it build in  body parser , the separate one is deprecated now and cause problem !
 app.use(express.json())
-// why thos f*** create me problem ??
+// why thos f*** create me problem , because bodyParser expression is deprecated and cors needed ()
 // app.use(bodyParser.json())
 // app.use(cors)
 //Movies App
-app.use("/api/", usersRoutes)
+app.use("/api/users", usersRoutes)
 
 app.use("/api/", filmsRoutes)
 
@@ -36,6 +41,12 @@ app.use((error, req, res, next) => {
   res.status(error.code || 500);
   res.json({ message: error.message || "AN unknown error occurred !" });
 })
+
+// accept whatever the bad route
+app.use((req, res) => {
+  const error = new HttpError("bad Route .", 404);
+  throw error;
+});
 
 app.all("*", (
   (req, res) => {

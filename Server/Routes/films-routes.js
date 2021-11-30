@@ -15,20 +15,19 @@ router.get('/films/', FilmController.getAllFilms)
 
 
 // return a film by id
-router.get("/films/:uid", FilmController.getFilmById)
+router.get("/films/:uid", FilmController.getFilmsById)
 
 // return a films
 router.get("/films/search/query", FilmController.searchFilmByQuery);
 
 // add a film
-router.post("/film", FilmController.addFilm)
+router.post("/film", FilmController.addFilm);
 
-router.post("/film1", (req, res) => {
+// update a film
+router.patch("/films/:uid", FilmController.patchFilm);
 
-    console.log(req.body);
-    res.send("thankkskskskskks")
-})
-
+// delete a film
+router.delete("/films/:uid",FilmController.deleteFilm)
 
 
 

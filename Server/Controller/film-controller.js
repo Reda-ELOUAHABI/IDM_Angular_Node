@@ -1,10 +1,14 @@
 // package that generate unique ids , but it's not I think
-const uuid = require("uuid")
+const { v4: uuidv4 } = require('uuid')
 
 const HttpError = require("../Models/http-error");
 
 
-films = [
+let films = [
+    {
+        id: "10",
+        name: "reda call me "
+    },
     {
         id: "10",
         name: "reda call me "
@@ -28,20 +32,22 @@ const getAllFilms = (req, res) => {
     res.send(films);
 };
 
-const getFilmById = (req, res) => {
+const getFilmsById = (req, res) => {
     filmId = req.params.uid; //params = {uid: '11'}
-    film = films.find((f => {
+
+    // find() will return only the first element
+    const filmsWanted = films.filter((f => {
         return f.id === filmId;
     }))
 
-    if (!film) {
+    if (!filmsWanted || filmsWanted.length === 0) {
         // const filmNotExist = new HttpError("film does not Exist", 404);
         // throw filmNotExist;
-        throw new HttpError("film does not Exist", 404);;
+        throw new HttpError("films do not Exist", 404);;
         // OR for async [DB ...] :
         // return next( new HttpError("user not found",404));
     }
-    res.json({ film }); // in JS : {film} == {film: film}
+    res.json({ filmsWanted }); // in JS : {film} == {film: film}
 };
 
 const searchFilmByQuery = (req, res) => {
@@ -75,18 +81,58 @@ const addFilm = (req, res) => {
     const { name } = req.body;
     // const name = req.body.name [the up is preferable to bind multiple element from body , while in spring boot we needed to create a full class ]
     const createdFilm = {
-        id: uuid(),
+        id: uuidv4(),
         name,
     }
     films.push(createdFilm);
     res.status(201).json({ message: "created successfuly" })
 };
 
+const patchFilm = (req, res) => {
+    // res.json({hi: "jajja"});
+    // GOOD practice
+    // capt name from body
+    const { name } = req.body;
+
+    const filmId = req.params.uid;
+    // take object to be updated as a copy , in case something fails ,
+    // we wont change somthng in the origin object
+    const updatedFilm = {
+        ...films.find(f =>
+            f.id === filmId)
+    };
+    const filmIndex = films.findIndex(f => f.id === filmId);
+    console.log(filmIndex);
+    // update it now with our req 
+    updatedFilm.name = name
+
+    // replace it now
+    films[filmIndex] = updatedFilm;
+    res.status(200).json({ film: updatedFilm });
+
+
+};
+
+const deleteFilm = (req, res) => {
+    const filmId = req.params.uid;
+    // verify if it exists first
+    if (!films.find(f => f.id === filmId)) {
+        throw new HttpError("could not find the specific film", 404)
+    }
+    // keep only element with different id of what we want to delete
+    films = films.filter(f => f.id != filmId)
+    res.status(200).json({ message: "film id=  " + filmId + " deleted successfuly" })
+
+
+};
+
 exports.getAllFilmsLink = getAllFilmsLink;
 exports.getAllFilms = getAllFilms;
-exports.getFilmById = getFilmById;
+exports.getFilmsById = getFilmsById;
 exports.searchFilmByQuery = searchFilmByQuery;
 exports.addFilm = addFilm;
+exports.patchFilm = patchFilm;
+exports.deleteFilm = deleteFilm;
 
 
 

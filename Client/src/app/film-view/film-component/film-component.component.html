@@ -1,22 +1,21 @@
 <!-- [ngClass]="{'IdExist' : filmsIds.indexOf('film.id')  }  -->
-<div class="card"
-    style="border: 1px solid; height: 350px; ">
-    <img  alt="I will fix the image path :" [src]="getImageFromServer(film.backdrop_path)" />
-    <!-- <h3>{{film.title }} - {{film.vote_averrage}}mdb </h3> -->
-    <h3>{{film.title }}</h3>
-  <button style="
+<div class="card" style="border: 1px solid; height: 350px; ">
+  <img alt="I will fix the image path :" [src]="getImageFromServer(film.backdrop_path)" />
+  <!-- <h3>{{film.title }} - {{film.vote_averrage}}mdb </h3> -->
+  <h3>{{film.title }}</h3>
+  <!-- <button style="
   border: none;
   background-color: transparent;
   position: relative;
   left: 10px;
 
-">❤</button>
-    <!-- <p>{{film.overview}} </p> -->
-  <a [routerLink]="['/details',film.id]">  <button type="button" class="btn btn-primary shwoDetailsBtn" (click)="showCurrentFilm(film)" >
+">❤</button> -->
+  <!-- <p>{{film.overview}} </p> -->
+  <a [routerLink]="['/details',film.id]"> <button type="button" class="btn btn-primary shwoDetailsBtn"
+      (click)="showCurrentFilm(film)">
 
-        show details
+      show details
 
-        </button></a>
+    </button></a>
 
 </div>
-
