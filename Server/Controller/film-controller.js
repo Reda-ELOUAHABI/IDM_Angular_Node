@@ -1,7 +1,8 @@
 // package that generate unique ids , but it's not I think
 const { v4: uuidv4 } = require('uuid')
+
 var MongoClient = require('mongodb').MongoClient;
-var uri = "mongodb://movie1:movie@cluster0-shard-00-00.c4sms.mongodb.net:27017,cluster0-shard-00-01.c4sms.mongodb.net:27017,cluster0-shard-00-02.c4sms.mongodb.net:27017/movies?ssl=true&replicaSet=atlas-3al5ka-shard-0&authSource=admin&retryWrites=true&w=majority";
+var uri = "mongodb://movie1:movie@cluster0-shard-00-00.c4sms.mongodb.net:27017,cluster0-shard-00-01.c4sms.mongodb.net:27017,cluster0-shard-00-02.c4sms.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-3al5ka-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const HttpError = require("../Models/http-error");
 
@@ -36,14 +37,14 @@ const addFilm = async (req, res) => {
         name,
     }
     films.push(createdFilm);
-
+    // didnot working properly !
     const client = new MongoClient(uri);
     try {
         await client.connect();
         // console.log("connected");
-        const db = client.db('reda');
+        const db = client.db();
         // console.log("DB passed");
-        const result = db.collection('reda').insertOne( createdFilm ); //to get them all .find().toArray()
+        const result = db.collection('reda').insertOne(createdFilm); //to get them all .find().toArray()
         // console.log("DB passed");
     }
     catch (error) {
