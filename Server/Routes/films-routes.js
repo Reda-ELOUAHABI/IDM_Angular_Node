@@ -21,13 +21,13 @@ router.get("/films/:uid", FilmController.getFilmsById)
 router.get("/films/search/query", FilmController.searchFilmByQuery);
 
 // add a film
-router.post("/film", FilmController.addFilm);
+router.post("/films", FilmController.addFilm);
 
 // update a film
 router.patch("/films/:uid", FilmController.patchFilm);
 
 // delete a film
-router.delete("/films/:uid",FilmController.deleteFilm)
+router.delete("/films/:uid", FilmController.deleteFilm)
 
 
 

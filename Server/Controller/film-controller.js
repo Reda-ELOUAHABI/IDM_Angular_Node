@@ -1,7 +1,10 @@
 // package that generate unique ids , but it's not I think
 const { v4: uuidv4 } = require('uuid')
+var MongoClient = require('mongodb').MongoClient;
+var uri = "mongodb://movie1:movie@cluster0-shard-00-00.c4sms.mongodb.net:27017,cluster0-shard-00-01.c4sms.mongodb.net:27017,cluster0-shard-00-02.c4sms.mongodb.net:27017/movies?ssl=true&replicaSet=atlas-3al5ka-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const HttpError = require("../Models/http-error");
+
 
 
 let films = [
@@ -23,6 +26,33 @@ let films = [
         name: "zakaria call me "
     }
 ];
+
+const addFilm = async (req, res) => {
+    console.log(req);
+    const { name } = req.body;
+    // const name = req.body.name [the up is preferable to bind multiple element from body , while in spring boot we needed to create a full class ]
+    const createdFilm = {
+        id: uuidv4(),
+        name,
+    }
+    films.push(createdFilm);
+
+    const client = new MongoClient(uri);
+    try {
+        await client.connect();
+        // console.log("connected");
+        const db = client.db('reda');
+        // console.log("DB passed");
+        const result = db.collection('reda').insertOne( createdFilm ); //to get them all .find().toArray()
+        // console.log("DB passed");
+    }
+    catch (error) {
+        // console.log(error);
+        return // res.status(507).json({ message: "error mongo : " })
+    }
+    client.close();
+    res.status(201).json({ message: "created successfuly" })
+};
 
 const getAllFilmsLink = (req, res) => {
     res.send("<a href='api/films/'> get ALL Films </a>");
@@ -76,17 +106,7 @@ const searchFilmByQuery = (req, res) => {
 
 };
 
-const addFilm = (req, res) => {
-    console.log(req);
-    const { name } = req.body;
-    // const name = req.body.name [the up is preferable to bind multiple element from body , while in spring boot we needed to create a full class ]
-    const createdFilm = {
-        id: uuidv4(),
-        name,
-    }
-    films.push(createdFilm);
-    res.status(201).json({ message: "created successfuly" })
-};
+
 
 const patchFilm = (req, res) => {
     // res.json({hi: "jajja"});

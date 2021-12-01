@@ -26,7 +26,7 @@ app.use(express.json())
 //Movies App
 app.use("/api/users", usersRoutes)
 
-app.use("/api/", filmsRoutes)
+app.use("/api", filmsRoutes)
 
 // app.use(morgan('dev'))
 //4 Logging
