@@ -2,7 +2,8 @@
 const { v4: uuidv4 } = require('uuid')
 
 var MongoClient = require('mongodb').MongoClient;
-var uri = "mongodb://movie1:movie@cluster0-shard-00-00.c4sms.mongodb.net:27017,cluster0-shard-00-01.c4sms.mongodb.net:27017,cluster0-shard-00-02.c4sms.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-3al5ka-shard-0&authSource=admin&retryWrites=true&w=majority";
+const mongoose = require("mongoose");
+var uri = "mongodb://movie1:movie@cluster0-shard-00-00.c4sms.mongodb.net:27017,cluster0-shard-00-01.c4sms.mongodb.net:27017,cluster0-shard-00-02.c4sms.mongodb.net:27017/movies?ssl=true&replicaSet=atlas-3al5ka-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 const HttpError = require("../Models/http-error");
 
@@ -29,22 +30,41 @@ let films = [
 ];
 
 const addFilm = async (req, res) => {
-    console.log(req);
+    // console.log(req);
     const { name } = req.body;
     // const name = req.body.name [the up is preferable to bind multiple element from body , while in spring boot we needed to create a full class ]
     const createdFilm = {
-        id: uuidv4(),
+        // _id is the id in collection mongo , so if you want to use only your own ids, add _
+        _id: uuidv4(),
         name,
     }
     films.push(createdFilm);
-    // didnot working properly !
+
+    // didnot working properly ! using ('mongodb').MongoClient awaiiiit asahbi pour qu'il attend ,
+    // without it it close db before executing query !!
+    /*
+        // connect to your cluster
+        const client = await MongoClient.connect(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        // specify the DB's name
+        const db = client.db('nameOfYourDB');
+        // execute find query
+        // const items = await db.collection('items').find({}).toArray();
+        const items = await db.collection('items').insertOne(createdFilm);
+        console.log(items);
+        // close connection
+        client.close();
+        */
+
     const client = new MongoClient(uri);
     try {
         await client.connect();
         // console.log("connected");
         const db = client.db();
         // console.log("DB passed");
-        const result = db.collection('reda').insertOne(createdFilm); //to get them all .find().toArray()
+        const result = await db.collection('reda').insertOne(createdFilm); //to get them all .find().toArray()
         // console.log("DB passed");
     }
     catch (error) {
@@ -52,6 +72,10 @@ const addFilm = async (req, res) => {
         return // res.status(507).json({ message: "error mongo : " })
     }
     client.close();
+
+
+    //    using mongoose
+
     res.status(201).json({ message: "created successfuly" })
 };
 
@@ -59,8 +83,25 @@ const getAllFilmsLink = (req, res) => {
     res.send("<a href='api/films/'> get ALL Films </a>");
 };
 
-const getAllFilms = (req, res) => {
-    res.send(films);
+const getAllFilms = async (req, res) => {
+    let result;
+    const client = new MongoClient(uri);
+    try {
+        await client.connect();
+        // console.log("connected");
+        const db = client.db();
+        // console.log("DB passed");
+        result = await db.collection('reda').find().toArray()
+        // console.log("DB passed");
+    }
+    catch (error) {
+        // console.log(error);
+        return // res.status(507).json({ message: "error mongo : " })
+    }
+    client.close();
+
+    // res.send(films);
+    res.send(result);
 };
 
 const getFilmsById = (req, res) => {
