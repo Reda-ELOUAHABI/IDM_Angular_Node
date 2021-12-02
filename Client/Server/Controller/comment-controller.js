@@ -35,7 +35,6 @@ const postComment = async (req, res) => {
     const result = await createdComment.save();
     // res.json({ message: "created successfuly" })
     res.status(201).json(result);
-
 }
 
 exports.postComment = postComment;

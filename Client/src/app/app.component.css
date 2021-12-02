@@ -320,8 +320,10 @@
 
   .nav-item:hover{
     background-color: #E50914;
+    color: ghostwhite;
     border: none;
     transform: rotate(20deg);
+
     /*transform: scaleY(1.5);*/
 
   }
