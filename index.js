@@ -16,7 +16,7 @@ const usersRoutes = require('./Routes/users-routes')
 const commentRoutes = require('./Routes/comment-routes')
 const HttpError = require("./Models/http-error");
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 80;
 var app = express()
 
 app.use(cors())
