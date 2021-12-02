@@ -15,6 +15,7 @@ import { SigninComponent } from './signin/signin.component';
 import { FavorisComponent } from './favoris/favoris.component';
 import { NavbarNotConnComponent } from './navbar-not-conn/navbar-not-conn.component';
 import { NavbarConnectedComponent } from './navbar-connected/navbar-connected.component';
+import { CommentComponent } from './details-film/comment/comment.component';
 
 //module : qui va charger l app
 @NgModule({
@@ -29,6 +30,7 @@ import { NavbarConnectedComponent } from './navbar-connected/navbar-connected.co
     FavorisComponent,
     NavbarNotConnComponent,
     NavbarConnectedComponent,
+    CommentComponent,
   ],
   // Les modules
   imports: [

@@ -108,4 +108,17 @@ fault-rtdb.firebaseio.com/movies.json'*/
     const url = "https://movies-app-33617-default-rtdb.firebaseio.com/Users.json";
     return this.http.get(url);
   }
+
+  GetCommentOfFilm(filmId: any){
+    const url= "http://localhost:3000/api/comment/"+filmId;
+    return this.http.get(url);
+
+  }
+
+  AddComment(filmId: any, comment: any){
+    const url= "http://localhost:3000/api/comment";
+    const body = { filmId: filmId, comment: comment };
+    return this.http.post(url,body);
+
+  }
 }

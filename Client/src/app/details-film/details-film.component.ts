@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {ServiceFilmService} from "../Service/service-film.service";
 import {film} from "../Modules/Films";
@@ -10,23 +10,26 @@ import {film} from "../Modules/Films";
   styleUrls: ['./details-film.component.css']
 })
 export class DetailsFilmComponent implements OnInit {
+  film : any;
+  filmId :any;
+
 
   constructor(
     private roote: ActivatedRoute,
     private serviceFilmService: ServiceFilmService
   ) { }
- film : any;
+
   ngOnInit(): void {
     const id :number = this.roote.snapshot.params['id'];
+    this.filmId=id;
     //using Observable
     // this.roote.paramMap.subscribe(res =>
     // {
     //
     // });
-
     this.serviceFilmService.getFilmDetail(id).subscribe((result:any)=>{
       this.film=result;
-      console.log(film)
+      // console.log(film)
     })}
   getImageFromServer(urlImg: string){
     if(urlImg!=null){
@@ -39,9 +42,6 @@ export class DetailsFilmComponent implements OnInit {
   }
 
   AddToFavrite(id: any) {
-
     this.serviceFilmService.PostFilmToFavorie(id).subscribe(res => console.log(res))
-
-
   }
 }

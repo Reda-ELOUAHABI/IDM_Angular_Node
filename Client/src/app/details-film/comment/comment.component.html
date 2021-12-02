@@ -1,0 +1,8 @@
+<div>
+  <ol *ngFor="let comment of comments; let index = index;">
+    <p>comment {{index}} : {{comment.comment}}</p>
+  </ol>
+
+  <textarea placeholder="add comment here" #query> </textarea>
+  <button class="btn-primary btn" (click)="addComment(query.value)"> add comment</button>
+</div>
