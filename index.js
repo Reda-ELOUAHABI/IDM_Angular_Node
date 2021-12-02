@@ -22,8 +22,6 @@ var app = express()
 app.use(cors())
 app.use('/', express.static(path.join(__dirname, "Angular")));
 
-
-
 // const app = express();
 // Express has it build in  body parser , the separate one is deprecated now and cause problem !
 app.use(express.json())
@@ -68,5 +66,5 @@ app.all("*", (
 ))
 
 app.listen(PORT, function () {
-  console.log(`server runing at http://localhost:${port}`)
+  console.log(`server runing at http://localhost:${PORT}`)
 })
