@@ -7,7 +7,9 @@
 const express = require('express')
 // const bodyParser = require('body-parser')
 // const morgan = require('morgan')
-const cors = require('cors')
+const cors = require('cors');
+const path = require('path');
+
 
 const filmsRoutes = require('./Routes/films-routes')
 const usersRoutes = require('./Routes/users-routes')
@@ -18,6 +20,10 @@ const port = 3000
 var app = express()
 
 app.use(cors())
+app.use('/', express.static(path.join(__dirname, "Angular")));
+
+
+
 // const app = express();
 // Express has it build in  body parser , the separate one is deprecated now and cause problem !
 app.use(express.json())
@@ -29,6 +35,10 @@ app.use("/api/users", usersRoutes)
 
 app.use("/api", filmsRoutes)
 app.use("/api", commentRoutes)
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, "Angular", "index.html"));
+})
 
 // app.use(morgan('dev'))
 //4 Logging
@@ -56,7 +66,6 @@ app.all("*", (
       send('<h1>resources not found bro</h1>')
   }
 ))
-
 
 app.listen(port, function () {
   console.log(`server runing at http://localhost:${port}`)
