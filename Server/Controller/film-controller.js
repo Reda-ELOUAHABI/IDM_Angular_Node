@@ -1,11 +1,21 @@
 // package that generate unique ids , but it's not I think
 const { v4: uuidv4 } = require('uuid')
 
-var MongoClient = require('mongodb').MongoClient;
+// var MongoClient = require('mongodb').MongoClient;
 const mongoose = require("mongoose");
+const HttpError = require("../Models/http-error");
+const Film = require('../Models/film');
+
+// database name is movies : inside uri
 var uri = "mongodb://movie1:movie@cluster0-shard-00-00.c4sms.mongodb.net:27017,cluster0-shard-00-01.c4sms.mongodb.net:27017,cluster0-shard-00-02.c4sms.mongodb.net:27017/movies?ssl=true&replicaSet=atlas-3al5ka-shard-0&authSource=admin&retryWrites=true&w=majority";
 
-const HttpError = require("../Models/http-error");
+mongoose.connect(uri).then(() => {
+    console.log('connected successfuly');
+}).catch((err) => {
+    console.log("connection failed");
+});
+
+
 
 
 
@@ -35,7 +45,7 @@ const addFilm = async (req, res) => {
     // const name = req.body.name [the up is preferable to bind multiple element from body , while in spring boot we needed to create a full class ]
     const createdFilm = {
         // _id is the id in collection mongo , so if you want to use only your own ids, add _
-        _id: uuidv4(),
+        // _id: uuidv4(),
         name,
     }
     films.push(createdFilm);
@@ -57,25 +67,25 @@ const addFilm = async (req, res) => {
         // close connection
         client.close();
         */
-
-    const client = new MongoClient(uri);
-    try {
-        await client.connect();
-        // console.log("connected");
-        const db = client.db();
-        // console.log("DB passed");
-        const result = await db.collection('reda').insertOne(createdFilm); //to get them all .find().toArray()
-        // console.log("DB passed");
-    }
-    catch (error) {
-        // console.log(error);
-        return // res.status(507).json({ message: "error mongo : " })
-    }
-    client.close();
-
-
+    /*
+        const client = new MongoClient(uri);
+        try {
+            await client.connect();
+            // console.log("connected");
+            const db = client.db();
+            // console.log("DB passed");
+            const result = await db.collection('reda').insertOne(createdFilm); //to get them all .find().toArray()
+            // console.log("DB passed");
+        }
+        catch (error) {
+            // console.log(error);
+            return // res.status(507).json({ message: "error mongo : " })
+        }
+        client.close();
+    */
+    const createdFilm4Mongoose = new Film(createdFilm);
     //    using mongoose
-
+    const result = await createdFilm4Mongoose.save();
     res.status(201).json({ message: "created successfuly" })
 };
 
@@ -85,6 +95,8 @@ const getAllFilmsLink = (req, res) => {
 
 const getAllFilms = async (req, res) => {
     let result;
+    // MongoClient
+    /*
     const client = new MongoClient(uri);
     try {
         await client.connect();
@@ -99,6 +111,9 @@ const getAllFilms = async (req, res) => {
         return // res.status(507).json({ message: "error mongo : " })
     }
     client.close();
+    */
+//    .exec() to turn it into a Promise
+    result = await Film.find().exec();
 
     // res.send(films);
     res.send(result);
@@ -184,8 +199,6 @@ const deleteFilm = (req, res) => {
     // keep only element with different id of what we want to delete
     films = films.filter(f => f.id != filmId)
     res.status(200).json({ message: "film id=  " + filmId + " deleted successfuly" })
-
-
 };
 
 exports.getAllFilmsLink = getAllFilmsLink;

@@ -28,5 +28,6 @@ subscribe((res:any) =>
   console.log("comment server respond = "+res)
 
 )
+    window.location.reload();
   }
 }

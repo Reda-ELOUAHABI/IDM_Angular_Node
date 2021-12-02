@@ -1,13 +1,14 @@
 // cree un shema pour films ,,
 
 const mongoose = require('mongoose');
+
 const filmSchema = new mongoose.Schema({
 name: {type: String , required: true}
 });
 
 
 
-module.exports = mongoose.model('film',filmSchema);
+module.exports = mongoose.model('Film',filmSchema);
 // const filmShema = mongoose.Sc hema({
 //     _id: mongoode,shema.types,ObjectId,
 //     title: {type: String , reqired: true},

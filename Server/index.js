@@ -11,6 +11,7 @@ const cors = require('cors')
 
 const filmsRoutes = require('./Routes/films-routes')
 const usersRoutes = require('./Routes/users-routes')
+const commentRoutes = require('./Routes/comment-routes')
 const HttpError = require("./Models/http-error");
 
 const port = 3000
@@ -27,6 +28,7 @@ app.use(express.json())
 app.use("/api/users", usersRoutes)
 
 app.use("/api", filmsRoutes)
+app.use("/api", commentRoutes)
 
 // app.use(morgan('dev'))
 //4 Logging

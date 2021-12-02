@@ -2,7 +2,9 @@
   <ol *ngFor="let comment of comments; let index = index;">
     <p>comment {{index}} : {{comment.comment}}</p>
   </ol>
+<div class="" style="display: flex" >
+  <textarea class="form-control "  style="width: 60%" placeholder="add comment here" #query> </textarea>
+  <button class="btn" (click)="addComment(query.value)" class="addComment"> add comment</button>
+</div>
 
-  <textarea placeholder="add comment here" #query> </textarea>
-  <button class="btn-primary btn" (click)="addComment(query.value)"> add comment</button>
 </div>

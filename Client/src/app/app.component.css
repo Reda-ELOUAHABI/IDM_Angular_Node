@@ -223,7 +223,7 @@
     display: flex;
     align-items: center;
     line-height: 20px;
-    
+
   }
 
   footer a {
@@ -293,18 +293,43 @@
     }
   }
 
-  /* 
-  
-  
-  
+  /*
+
+
+
   My Style
-  
-  
-  
-  
-  
+
+
+
+
+
   */
   footer{
       position: absolute;
       bottom: 10px;
   }
+
+
+
+
+
+
+
+
+/*  Nav Bar */
+
+  .nav-item:hover{
+    background-color: #E50914;
+    border: none;
+    transform: rotate(20deg);
+    /*transform: scaleY(1.5);*/
+
+  }
+  /*.nav-link:hover{*/
+  /*  background-color: #E50914;*/
+  /*  border: none;*/
+  /*  transform: scaleY(1.5);*/
+
+  /*}*/
+
+

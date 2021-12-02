@@ -1,8 +1,15 @@
-<div>
-  <div class="card" style="border: 1px solid; height: 550px;  ">
-    <button style="height: 60px; width: 100px;" (click)="AddToFavrite(film.id)">
+<div style="position: relative;
+top: -39px;">
+  <div style="padding-top: -30px;
+
+" class="card" style="border: none; height: 550px; padding: 10px; ">
+    <button style="height: 60px; width: 100px; border: none; position: absolute;
+top: -16px;
+right: -50px;
+" (click)="AddToFavrite(film.id)" class="jadore">
       ❤
     </button>
+
     <img  alt="I will fix the image path :" [src]="getImageFromServer(film['backdrop_path'])"  />
     <!-- <h3>{{film.title }} - {{film.vote_averrage}}mdb </h3> -->
     <h3>{{film.title }}</h3>
