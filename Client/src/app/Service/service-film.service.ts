@@ -89,7 +89,9 @@ export class ServiceFilmService {
   }
 
   getFilmDetail(id: any) {
-    const url = remoteHost+'/movie/' + id + '?api_key=53cd43478eccb1239bfa57194c3cfe90&language=en-US';
+    const url = remoteHost+'/movie/' + id + '?api_key=53cd43478eccb1239bfa57194c3cfe90&language=en-US&append_to_response=videos';
+    console.log(url);
+    // alert(url)
     return this.http.get(url);
   }
 
@@ -121,16 +123,29 @@ fault-rtdb.firebaseio.com/movies.json'*/
     return this.http.get(url);
   }
 
+  //Register a user
+  Register(username: any,email: any, password: any ){
+    const url = URL + "/api/users/signup";
+    const body = { username: username.toString(), email: email.toString() ,  password: password.toString() };
+    return this.http.post(url,body);
+  }
+  //login a user
+  Login(email: any, password: any ){
+    const url = URL + "/api/users/signin";
+    const body = {email: email.toString() ,  password: password.toString() };
+    return this.http.post(url,body);
+  }
+
+  //Comments
   GetCommentOfFilm(filmId: any) {
     const url = URL + "/api/comment/" + filmId;
     return this.http.get(url);
-
   }
 
   AddComment(filmId: any, comment: any) {
     const url = URL + "/api/comment";
     const body = { filmId: filmId, comment: comment };
     return this.http.post(url, body);
-
   }
+
 }

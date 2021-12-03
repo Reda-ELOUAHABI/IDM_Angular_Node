@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {ServiceFilmService} from "../Service/service-film.service";
 import {film} from "../Modules/Films";
+import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
 
 
 @Component({
@@ -12,12 +13,20 @@ import {film} from "../Modules/Films";
 export class DetailsFilmComponent implements OnInit {
   film : any;
   filmId :any;
+  //Iframe
+  videoURL = "https://www.youtube.com/embed/";
+  // @ts-ignore
+  safeSrc: SafeResourceUrl;
+  thumbnail: any;
 
 
   constructor(
     private roote: ActivatedRoute,
-    private serviceFilmService: ServiceFilmService
-  ) { }
+    private serviceFilmService: ServiceFilmService,
+    //iframe Youtube
+    private sanitizer: DomSanitizer
+  ) {
+      }
 
   ngOnInit(): void {
     const id :number = this.roote.snapshot.params['id'];
@@ -29,8 +38,11 @@ export class DetailsFilmComponent implements OnInit {
     // });
     this.serviceFilmService.getFilmDetail(id).subscribe((result:any)=>{
       this.film=result;
-      // console.log(film)
+      console.log("Film Key \t"+this.videoURL +result.videos.results[0].key);
+      this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.videoURL +result.videos.results[0].key);
     })}
+
   getImageFromServer(urlImg: string){
     if(urlImg!=null){
       const ImgFIlm = "https://image.tmdb.org/t/p/w500/"+ urlImg;

@@ -10,6 +10,7 @@ router.get("/:uid", userController.getUserById)
 
 // register
 router.post('/signup',
+    // Validator
     [
         check('username').not().isEmpty(),
         check('email').isEmail().normalizeEmail(),

@@ -16,9 +16,9 @@ export class SigninComponent implements OnInit {
   logged=false;
   ngOnInit(): void {
   }
-
+//  using FireBase
+/*
   TestUser(username: string, password: string) {
-
     this.service.GetUsers().subscribe((res:any)=>{
       // console.log(Object.values(res));
       Object.values(res).forEach((value: any) => {
@@ -27,8 +27,6 @@ export class SigninComponent implements OnInit {
     this.router.navigate(['connected'])
     console.log(this.logged)
     return;
-
-
   }
         // console.log(this.logged)
         // this.allUsers.map(value);
@@ -39,9 +37,35 @@ export class SigninComponent implements OnInit {
       if (this.logged==false){
         alert("incorrect inputs")
       }
-
       // console.log(res)
     })
-
   }
+  */
+
+  //using my own backend
+  TestUser(email: string, password: string) {
+    this.service.Login(email,password).subscribe(
+      (res:any)=>{
+      // console.log("User information : " + email + password);
+      console.log(res.status);
+      // console.log(Object.values(res));
+
+
+
+if(res.status){
+    this.router.navigate(['connected'])
+    return;
+  }
+      if (!res.status){
+        alert("incorrect inputs")
+      }
+    },
+      err => {console.log('HTTP Error', err);
+        alert(err.error)
+        },
+      () => console.log('HTTP request completed.')
+      )
+  }
+
+
 }

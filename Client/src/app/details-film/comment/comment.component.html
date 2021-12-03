@@ -1,10 +1,12 @@
 <div>
-  <ol *ngFor="let comment of comments; let index = index;">
-    <p>comment {{index}} : {{comment.comment}}</p>
+  <br>  <br>
+  <div class="" style="display: flex" >
+    <textarea class="form-control "  style="width: 60%" placeholder="add comment here" #query> </textarea>
+    <button class="btn" (click)="addComment(query.value)" class="addComment"> add comment</button>
+  </div>
+  <br>  <br>
+  <ol *ngFor="let comment of comments; let index = index;" style="background-color: #888888">
+    <h4>👨‍💼<p style="font-size: 10px;">{{index}}</p> </h4>
+    <p style="font-size: 15px; font-weight: bold; color: whitesmoke"> {{comment.comment}}</p>
   </ol>
-<div class="" style="display: flex" >
-  <textarea class="form-control "  style="width: 60%" placeholder="add comment here" #query> </textarea>
-  <button class="btn" (click)="addComment(query.value)" class="addComment"> add comment</button>
-</div>
-
 </div>
