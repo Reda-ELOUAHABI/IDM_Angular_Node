@@ -8,20 +8,33 @@ import {ServiceFilmService} from "../Service/service-film.service";
 })
 export class FavorisComponent implements OnInit {
 
-  filmsIds: any;
+  filmsIds=[]; //for FireBase , it was : any; not an array
   films =[];
   constructor(private serviceFilmService: ServiceFilmService) { }
 
   async ngOnInit(): Promise<void> {
     this.serviceFilmService.GetFilmsOnFavories().subscribe((Response: any) => {
+      //FireBase
       console.log(Object.values(Response));
-      this.filmsIds = Object.values(Response);
+
+      Response.result.forEach((r:any) => {
+        // @ts-ignore
+        this.filmsIds.push(r.id);
+        console.log("id       "+r.id)
+      })
+      // this.filmsIds = Object.values(Response);
+    //  NodeJs
+
+      // this.filmsIds= Object.values(Response.results.id);
+
+    // get response
+    //   console.log(Response)
     });
 
     await new Promise(f => setTimeout(f, 2000));
     this.filmsIds.forEach(
       (id: any) => {
-        // console.log(id);
+        console.log(id);
         this.serviceFilmService.getFilmDetail(id).subscribe((result: any) => {
           console.log(result)
           // @ts-ignore

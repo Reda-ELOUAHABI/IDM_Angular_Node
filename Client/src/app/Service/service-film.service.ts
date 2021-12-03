@@ -73,7 +73,6 @@ export class ServiceFilmService {
         // jsonResult = response.json();
         //  this.films=Response["result"]
         console.log(Response.results);
-
         return Response.results;
       },
         (error) => {
@@ -104,15 +103,24 @@ export class ServiceFilmService {
   PostFilmToFavorie(id: any) {
     /*curl -X PUT -d '{ "moviesFavories": { "id": "21"}}' 'https://movies-app-33617-de
 fault-rtdb.firebaseio.com/movies.json'*/
-    const url = FireBaseURL+"/movies.json";
-    return this.http.post(url, id);
+
+    //FireBase
+    // const url = FireBaseURL+"/movies.json";
+    //NodeJs
+    const url = URL+"/api/favoris";
+    return this.http.post(url, {id: id});
   }
+
   GetFilmsOnFavories() {
-    const url = FireBaseURL+"/movies.json";
+    //FireBase
+    //  const url = FireBaseURL+"/movies.json";
+
+    //NodeJs
+   const url = URL+"/api/favoris";
     return this.http.get(url);
   }
 
-  //  Auth
+  //  Auth Using FireBase
   PostUser(username: any, password: any) {
     const url = FireBaseURL+"/Users.json";
     const body = { username: username, password: password };

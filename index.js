@@ -14,6 +14,7 @@ const path = require('path');
 const filmsRoutes = require('./Routes/films-routes')
 const usersRoutes = require('./Routes/users-routes')
 const commentRoutes = require('./Routes/comment-routes')
+const favorisRoutes = require('./Routes/favoris-routes')
 const HttpError = require("./Models/http-error");
 
 const PORT = process.env.PORT || 3000;
@@ -28,11 +29,12 @@ app.use(express.json())
 // why thos f*** create me problem , because bodyParser expression is deprecated and cors needed ()
 // app.use(bodyParser.json())
 // app.use(cors)
+
 //Movies App
 app.use("/api/users", usersRoutes)
-
 app.use("/api", filmsRoutes)
 app.use("/api", commentRoutes)
+app.use("/api", favorisRoutes)
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, "Angular", "index.html"));
