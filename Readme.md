@@ -1,3 +1,83 @@
+
+# Pour les fonctionnalités de l'application:
+## Home - SignIn - Signup - Favoris dans NavBar
+## Paination dans le bas , 'precedent' n'est activee que si on est deja dans la page 2 ou plus 
+## chercher un film, avec si un film donnee n'a pas d'image, il va utiliser une image par defaut 
+## Dans "Film Details" :
+### Ajouter Un film a la Favoris
+### Ajouter un Commentaire
+### afficher les commentaires des autres
+### Ragarder Le Trailer officiel dans la meme page
+
+# Lien Heroku:
+[Heroku Link](https://movie-streaming--v2.herokuapp.com/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### My comments for the project:
+
 009 Built-in Modules Intro00:02:44
 010 OS - Module00:07:33
 011 PATH - Module00:05:52
